@@ -1,3 +1,4 @@
+import { ExternalLink, MapPin, Navigation } from 'lucide-react';
 import { LEVELS, useApi, type Meter, type Reading, type Readings, type Transformer } from '../api';
 import { fmt, INSTALL_LABEL, LEVEL_LABEL, PHASE_LABEL, STATUS_LABEL } from '../format';
 import { Chart, type Point } from './Chart';
@@ -44,8 +45,22 @@ export function MeterPanel({ meter, transformer, onClose, onSelectPath }: Props)
               {transformer?.capacityKva != null && <span className="muted"> · {transformer.capacityKva} kVA</span>}
             </dd>
             <dt>Location</dt>
-            <dd className="mono">
-              {meter.location.lat.toFixed(5)}, {meter.location.lng.toFixed(5)}
+            <dd>
+              <span className="mono inline-flex items-center gap-1.5">
+                <MapPin className="size-4 text-muted-foreground" aria-hidden="true" />
+                {meter.location.lat.toFixed(5)}, {meter.location.lng.toFixed(5)}
+              </span>
+              <a
+                className="mt-1.5 flex w-fit items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-[13px] text-foreground no-underline hover:bg-accent"
+                href={`https://www.google.com/maps/dir/?api=1&destination=${meter.location.lat},${meter.location.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Opens Google Maps with directions to this meter"
+              >
+                <Navigation className="size-4" aria-hidden="true" />
+                Get directions
+                <ExternalLink className="size-3.5 text-muted-foreground" aria-hidden="true" />
+              </a>
             </dd>
           </dl>
 

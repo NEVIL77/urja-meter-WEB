@@ -42,6 +42,33 @@ A modern, responsive React web dashboard for the **Urja Meter API**. Built for o
 
 ---
 
+## Before and after: the portal vs this web client
+
+Both screens show the same data: the same 403 meters from the Urja Meter Ops portal. The web client gets it through the Urja Meter API, which fetches and cleans the portal data.
+
+<table>
+  <tr>
+    <th align="center">Before: the portal</th>
+    <th align="center">After: this web client</th>
+  </tr>
+  <tr>
+    <td><img src="docs/portal-meters.jpg" alt="The portal: a plain table of meters, 20 per page" /></td>
+    <td><img src="docs/web-client-after.jpg" alt="The web client: filters, network tree and a map of all 403 meters" /></td>
+  </tr>
+</table>
+
+| | Portal (before) | Web client (after) |
+|---|---|---|
+| Layout | A plain table, 20 meters per page (21 pages) | One screen: filters, summary, network tree and map |
+| Meters | Meter, serial, make, phase, status, DT | The same fields, plus location, status icons and consumption charts |
+| Where meters are | Not shown | Every meter on a map, with clusters and a satellite view |
+| Search and filter | Text search only | Search, status, make, phase, installation type and network branch |
+| Network hierarchy | Only the DT code | Full 7-level tree (zone down to transformer) with meter counts |
+| Overview numbers | "403 total" | Meters in view, faulty share, transformers, repaired records |
+| Data quality | Not shown | Lists the hierarchy records the API repaired |
+
+---
+
 ## Getting Started
 
 ### Prerequisites
