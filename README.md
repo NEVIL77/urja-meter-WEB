@@ -2,7 +2,15 @@
 
 A modern, responsive React web dashboard for the **Urja Meter API**. Built for operations and field desk engineers to monitor smart meters, explore the distribution network hierarchy, view recent consumption charts, and inspect data quality on a single screen.
 
+
+
 ![The web client: the network tree with the selected path traced in amber, every meter on a map, and one meter's consumption](docs/web-client-light.jpg)
+
+---
+
+## Demo video
+
+▶️ **[Watch the demo video](https://www.awesomescreenshot.com/video/57765041?key=fed8d9f5504ecce361ca79cf4a2e7808)**
 
 ---
 
@@ -32,13 +40,13 @@ A modern, responsive React web dashboard for the **Urja Meter API**. Built for o
 
 ## Screenshots
 
-````carousel
+```carousel
 ![Light mode: Network tree, meter map, and meter detail view](docs/web-client-light.jpg)
 <!-- slide -->
 ![Dark mode view](docs/web-client-dark.jpg)
 <!-- slide -->
 ![Satellite aerial imagery with meter clusters](docs/web-client-satellite.jpg)
-````
+```
 
 ---
 
@@ -46,16 +54,9 @@ A modern, responsive React web dashboard for the **Urja Meter API**. Built for o
 
 Both screens show the same data: the same 403 meters from the Urja Meter Ops portal. The web client gets it through the Urja Meter API, which fetches and cleans the portal data.
 
-<table>
-  <tr>
-    <th align="center">Before: the portal</th>
-    <th align="center">After: this web client</th>
-  </tr>
-  <tr>
-    <td><img src="docs/portal-meters.jpg" alt="The portal: a plain table of meters, 20 per page" /></td>
-    <td><img src="docs/web-client-after.jpg" alt="The web client: filters, network tree and a map of all 403 meters" /></td>
-  </tr>
-</table>
+| Before: the portal                                                          | After: this web client                                                                          |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ![The portal: a plain table of meters, 20 per page](docs/portal-meters.jpg) | ![The web client: filters, network tree and a map of all 403 meters](docs/web-client-after.jpg) |
 
 | | Portal (before) | Web client (after) |
 |---|---|---|
@@ -80,15 +81,13 @@ Both screens show the same data: the same 403 meters from the Urja Meter Ops por
 
 1. **Install dependencies:**
    ```bash
-   npm install
+    npm install
    ```
-
 2. **Start the development server:**
    ```bash
-   npm run dev
+    npm run dev
    ```
-
-3. Open **`http://localhost:5173`** in your browser.
+3. Open `http://localhost:5173` in your browser.
 
 The Vite dev server automatically proxies all `/api/*` requests to the Urja Meter API running at `http://127.0.0.1:3000`.
 
