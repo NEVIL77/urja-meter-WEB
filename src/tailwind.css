@@ -1,0 +1,26 @@
+/* Tailwind for the shadcn components only. The preflight reset is left out on
+   purpose: styles.css already styles the rest of the page. The shadcn colour
+   names point at the app's own tokens, so light and dark themes keep working. */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme inline {
+  --color-background: var(--surface);
+  --color-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--series);
+  --color-accent: var(--surface-2);
+  --color-accent-foreground: var(--ink);
+  --color-muted-foreground: var(--muted);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+}
+
+/* styles.css draws its own focus outline; the shadcn focus ring replaces it. */
+[data-slot='input']:focus-visible,
+[data-slot='select-trigger']:focus-visible {
+  outline: none;
+}

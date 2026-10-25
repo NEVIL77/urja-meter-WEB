@@ -12,6 +12,8 @@ import {
   type Transformer,
   type TreeNode,
 } from './api';
+import { OptionSelect } from './components/OptionSelect';
+import { Input } from '@/components/ui/input';
 import { DataQuality } from './components/DataQuality';
 import { MeterMap } from './components/MeterMap';
 import { MeterPanel } from './components/MeterPanel';
@@ -69,6 +71,7 @@ function countByPath(meters: Meter[]): Map<string, Counts> {
 export function App() {
   const [theme, setTheme] = useTheme();
   const now = useNow(30_000);
+  
   const health = useApi<Health>('/health', 60_000);
   const meters = useApi<MeterPage>('/meters?limit=500');
   const hierarchy = useApi<HierarchyResponse>('/hierarchy');
@@ -126,8 +129,8 @@ export function App() {
       <TopBar theme={theme} setTheme={setTheme} health={health.data} now={now} />
 
       <div className="filters" role="search">
-        <input
-          className="search"
+        <Input
+          className="w-[220px] bg-background"
           type="search"
           placeholder="Meter ID or serial number"
           value={filters.q}
@@ -139,36 +142,27 @@ export function App() {
             <StatusMark status={s} /> {STATUS_LABEL[s]} <span className="count">{statusCounts[s]}</span>
           </button>
         ))}
-        <select value={filters.make} onChange={(e) => setFilters((f) => ({ ...f, make: e.target.value }))} aria-label="Make">
-          <option value="">All makes</option>
-          {makes.map((m) => (
-            <option key={m}>{m}</option>
-          ))}
-        </select>
-        <select
+        <OptionSelect
+          label="Make"
+          allLabel="All makes"
+          value={filters.make}
+          onChange={(make) => setFilters((f) => ({ ...f, make }))}
+          options={makes.map((m) => ({ value: m, label: m }))}
+        />
+        <OptionSelect
+          label="Phase"
+          allLabel="Any phase"
           value={filters.phase}
-          onChange={(e) => setFilters((f) => ({ ...f, phase: e.target.value as Filters['phase'] }))}
-          aria-label="Phase"
-        >
-          <option value="">Any phase</option>
-          {Object.entries(PHASE_LABEL).map(([v, label]) => (
-            <option key={v} value={v}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <select
+          onChange={(phase) => setFilters((f) => ({ ...f, phase: phase as Filters['phase'] }))}
+          options={Object.entries(PHASE_LABEL).map(([value, label]) => ({ value, label }))}
+        />
+        <OptionSelect
+          label="Installation type"
+          allLabel="Any installation"
           value={filters.installType}
-          onChange={(e) => setFilters((f) => ({ ...f, installType: e.target.value as Filters['installType'] }))}
-          aria-label="Installation type"
-        >
-          <option value="">Any installation</option>
-          {Object.entries(INSTALL_LABEL).map(([v, label]) => (
-            <option key={v} value={v}>
-              {label}
-            </option>
-          ))}
-        </select>
+          onChange={(installType) => setFilters((f) => ({ ...f, installType: installType as Filters['installType'] }))}
+          options={Object.entries(INSTALL_LABEL).map(([value, label]) => ({ value, label }))}
+        />
         {filters.path && (
           <span className="path-chip">
             <span className="mono">{filters.path}</span>
