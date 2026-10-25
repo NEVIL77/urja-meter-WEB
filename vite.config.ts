@@ -1,4 +1,6 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 
 // The API has no CORS, so the dev server forwards /api/* to it on port 3000.
@@ -7,7 +9,8 @@ const api = {
 };
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
+  resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   server: { port: 5173, proxy: api },
   preview: { port: 5173, proxy: api },
 });

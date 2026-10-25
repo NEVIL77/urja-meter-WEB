@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Circle, MapContainer, Marker, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet';
 import { api, type Meter, type MeterPage, type Status } from '../api';
 import { fmt, STATUS_LABEL } from '../format';
+import { OptionSelect } from './OptionSelect';
 import { StatusMark, STATUSES, statusSvg } from './StatusMark';
 
 // Two basemaps, neither needing a key. The plain map is OpenStreetMap, greyed
@@ -131,20 +132,17 @@ export function MeterMap({ meters, selectedId, onSelect, fitKey }: Props) {
         </button>
         <label>
           <span className="muted">within </span>
-          <select
-            value={radiusKm}
-            onChange={(e) => {
-              const r = Number(e.target.value);
+          <OptionSelect
+            size="sm"
+            label="Search radius"
+            value={String(radiusKm)}
+            onChange={(v) => {
+              const r = Number(v);
               setRadiusKm(r);
               if (nearby) findNear(nearby.point, r);
             }}
-          >
-            {[0.5, 1, 2, 5].map((r) => (
-              <option key={r} value={r}>
-                {r} km
-              </option>
-            ))}
-          </select>
+            options={[0.5, 1, 2, 5].map((r) => ({ value: String(r), label: `${r} km` }))}
+          />
         </label>
       </div>
 
